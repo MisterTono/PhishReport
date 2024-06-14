@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Phishing Report Links</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding: 20px;
+        }
+        button {
+            display: block;
+            margin: 10px auto;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        .clicked {
+            background-color: #4CAF50;
+            color: white;
+        }
+        .thanks {
+            margin-top: 20px;
+            font-size: 20px;
+            color: #4CAF50;
+        }
+    </style>
+</head>
+<body>
+    <h1>Report Phishing</h1>
+    <div id="buttons-container">
+        <!-- Buttons will be added here by JavaScript -->
+    </div>
+    <div class="thanks" id="thanks-message" style="display: none;">
+        Thank you for reporting phishing sites!
+    </div>
+
+    <script>
+        const links = [
+            { name: 'SaferWebReport', url: 'https://github.com/jeroengui/SaferWebReport?tab=readme-ov-file' },
+            { name: 'Google Safe Browsing', url: 'https://safebrowsing.google.com/safebrowsing/report_phish/' },
+            { name: 'Microsoft', url: 'https://www.microsoft.com/en-us/wdsi/support/report-unsafe-site' },
+            { name: 'FortiGuard', url: 'https://www.fortiguard.com/webfilter' },
+            { name: 'URLScan', url: 'https://urlscan.io' },
+            { name: 'CRDF', url: 'https://threatcenter.crdf.fr/submit_url.html' },
+            { name: 'Netcraft', url: 'https://report.netcraft.com/report' },
+            { name: 'Palo Alto Networks', url: 'https://urlfiltering.paloaltonetworks.com/' },
+            { name: 'ESET', url: 'https://phishing.eset.com/en-us/report' },
+            { name: 'Trend Micro', url: 'https://global.sitesafety.trendmicro.com/index.php' },
+            { name: 'Bitdefender', url: 'https://www.bitdefender.com/consumer/support/answer/29358/' },
+            { name: 'McAfee', url: 'https://sitelookup.mcafee.com/' },
+            { name: 'Symantec', url: 'https://sitereview.symantec.com/#/' },
+            { name: 'Spam404', url: 'https://www.spam404.com/report.html' },
+            { name: 'Kaspersky', url: 'https://opentip.kaspersky.com/' },
+            { name: 'Cisco Talos', url: 'https://talosintelligence.com/reputation_center' }
+        ];
+
+        const container = document.getElementById('buttons-container');
+
+        links.forEach(link => {
+            const button = document.createElement('button');
+            button.textContent = link.name;
+            button.onclick = () => {
+                window.open(link.url, '_blank');
+                button.classList.add('clicked');
+                checkAllClicked();
+            };
+            container.appendChild(button);
+        });
+
+        function checkAllClicked() {
+            const allButtons = document.querySelectorAll('button');
+            const allClicked = Array.from(allButtons).every(button => button.classList.contains('clicked'));
+            if (allClicked) {
+                document.getElementById('thanks-message').style.display = 'block';
+            }
+        }
+    </script>
+</body>
+</html>
